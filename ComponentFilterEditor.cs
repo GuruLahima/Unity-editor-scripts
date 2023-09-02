@@ -13,6 +13,8 @@ static class ComponentFilterEditor
 
   static void DisplayFilterField(Editor editor)
   {
+    EditorGUILayout.BeginHorizontal();
+
     EditorGUI.BeginChangeCheck();
     string filterString = "";
     filterString = EditorGUILayout.TextField("Filter components", filterString);
@@ -23,6 +25,21 @@ static class ComponentFilterEditor
       // we have to do this to refresh the inspector. maybe there's a better way idk.
       EditorUtility.SetDirty(editor.target);
     }
+
+
+    GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
+    buttonStyle.fixedWidth = 65;
+    // button to clear the search field
+    if (GUILayout.Button("Reset", buttonStyle))
+    {
+      // update inspector only if the filter filed was updated
+      FilterComponents(editor.target as GameObject, "");
+      // we have to do this to refresh the inspector. maybe there's a better way idk.
+      EditorUtility.SetDirty(editor.target);
+    }
+
+    EditorGUILayout.EndHorizontal();
+
 
   }
 
