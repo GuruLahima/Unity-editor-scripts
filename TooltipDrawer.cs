@@ -17,7 +17,7 @@ public class TooltipDrawer : PropertyDrawer
   public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
   {
     if (!tooltipNotificationImage)
-      tooltipNotificationImage = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/! My Scripts/Helpers/Editor/Tooltip_16x16.png", typeof(Texture2D));
+      tooltipNotificationImage = (Texture2D)AssetDatabase.LoadAssetAtPath(GetScriptPath + "/tooltip_16x16.png", typeof(Texture2D));
 
     // First get the attribute
     CustomTooltipAttribute tooltip = attribute as CustomTooltipAttribute;
@@ -38,6 +38,19 @@ public class TooltipDrawer : PropertyDrawer
     // else
     //   EditorGUI.LabelField(position, label.text, "Use Range with float or int.");
   }
+  
+  string m_ScriptFilePath;
+  string m_ScriptFolder;
+  string GetScriptPath()
+  {
+    MonoScript ms = MonoScript.FromScriptableObject(this);
+    m_ScriptFilePath = AssetDatabase.GetAssetPath(ms);
 
+    FileInfo fi = new FileInfo(m_ScriptFilePath);
+    m_ScriptFolder = fi.Directory.ToString();
+    m_ScriptFolder.Replace('\\', '/');
+
+    return m_ScriptFolder;
+  }
 
 }
