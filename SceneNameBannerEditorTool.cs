@@ -53,27 +53,24 @@ namespace GuruLaghima.EditorTools
 
       GUILayout.BeginArea(new Rect(10, 10, Screen.width - 20, Screen.height - 65));
 
-      // GUILayout.Box((Texture)AssetDatabase.LoadAssetAtPath(m_ScriptFolder + "/tooltip_16x16.png", typeof(Texture)));
-      GUIContent gUI = new GUIContent();
-
-      // gUI.text = newActiveScene;
-      // GUI.skin.label.fontSize = Screen.height / 4;
-      // GUI.skin.label.alignment = TextAnchor.MiddleCenter;
-      // GUI.skin.label.wordWrap = true;
-      // GUILayout.Label(gUI);
-
-      gUI.text = newActiveScene;
-      GUI.skin.button.fontSize = Screen.height / 4;
-      GUI.skin.button.alignment = TextAnchor.MiddleCenter;
-      GUI.skin.button.wordWrap = true;
-      GUI.skin.button.border = new RectOffset(0, 0, 0, 0);
-      GUI.skin.button.imagePosition = ImagePosition.TextOnly;
-      GUI.skin.button.stretchWidth = true;
-      GUI.skin.button.stretchHeight = true;
+      GUIContent gUI = new GUIContent
+      {
+        text = newActiveScene
+      };
+      GUIStyle buttonStyle = new GUIStyle(GUI.skin.button)
+      {
+        fontSize = Screen.height / 4,
+        alignment = TextAnchor.MiddleCenter,
+        wordWrap = true,
+        border = new RectOffset(0, 0, 0, 0),
+        imagePosition = ImagePosition.TextOnly,
+        stretchWidth = true,
+        stretchHeight = true
+      };
       Color tempCol = GUI.backgroundColor;
       tempCol.a = 0.5f;
       GUI.backgroundColor = tempCol;
-      if (GUILayout.Button(newActiveScene))
+      if (GUILayout.Button(newActiveScene, buttonStyle))
         SceneView.duringSceneGui -= OnSceneGUI;
 
       GUILayout.EndArea();
