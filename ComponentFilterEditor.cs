@@ -27,10 +27,14 @@ static class ComponentFilterEditor
     }
 
 
-    GUIStyle buttonStyle = new GUIStyle(GUI.skin.button);
-    buttonStyle.fixedWidth = 65;
-    // button to clear the search field
-    if (GUILayout.Button("Reset", buttonStyle))
+        GUIStyle buttonStyle = new GUIStyle(GUI.skin.button)
+        {
+            fixedWidth = 65,
+            fixedHeight = 18,
+            fontSize = 12
+        };
+        // button to clear the search field
+        if (GUILayout.Button("Reset", buttonStyle))
     {
       // update inspector only if the filter filed was updated
       FilterComponents(editor.target as GameObject, "");
